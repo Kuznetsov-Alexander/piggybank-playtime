@@ -120,11 +120,18 @@ export default function Transfers() {
       if (senderError) throw senderError;
 
       // Обновляем баланс получателя
+      const { data: receiverAccount, error: receiverAccountError } = await supabase
+        .from('accounts')
+        .select('balance')
+        .eq('user_id', selectedProfile.user_id)
+        .single();
+
+      if (receiverAccountError) throw receiverAccountError;
+
       const { error: receiverError } = await supabase
-        .rpc('update_user_balance', {
-          user_id: selectedProfile.user_id,
-          amount_change: transferAmount
-        });
+        .from('accounts')
+        .update({ balance: receiverAccount.balance + transferAmount })
+        .eq('user_id', selectedProfile.user_id);
 
       if (receiverError) throw receiverError;
 

@@ -8,7 +8,9 @@ import Navigation from "./components/Navigation";
 import Dashboard from "./pages/Dashboard";
 import Auth from "./pages/Auth";
 import Goals from "./pages/Goals";
+import Transfers from "./pages/Transfers";
 import Transactions from "./pages/Transactions";
+import Game from "./pages/Game";
 import Achievements from "./pages/Achievements";
 import Profile from "./pages/Profile";
 import NotFound from "./pages/NotFound";
@@ -81,9 +83,19 @@ const App = () => (
                 <Goals />
               </ProtectedRoute>
             } />
+            <Route path="/transfers" element={
+              <ProtectedRoute>
+                <Transfers />
+              </ProtectedRoute>
+            } />
             <Route path="/transactions" element={
               <ProtectedRoute>
                 <Transactions />
+              </ProtectedRoute>
+            } />
+            <Route path="/game" element={
+              <ProtectedRoute>
+                <Game />
               </ProtectedRoute>
             } />
             <Route path="/achievements" element={
