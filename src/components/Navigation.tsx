@@ -9,14 +9,18 @@ import {
   User, 
   PiggyBank,
   Menu,
-  X
+  X,
+  Send,
+  Gamepad2
 } from 'lucide-react';
 import { useState } from 'react';
 
 const navItems = [
   { path: '/', icon: Home, label: 'Главная' },
   { path: '/goals', icon: Target, label: 'Цели' },
+  { path: '/transfers', icon: Send, label: 'Переводы' },
   { path: '/transactions', icon: TrendingUp, label: 'Транзакции' },
+  { path: '/game', icon: Gamepad2, label: 'Игра' },
   { path: '/achievements', icon: Trophy, label: 'Достижения' },
   { path: '/profile', icon: User, label: 'Профиль' },
 ];
