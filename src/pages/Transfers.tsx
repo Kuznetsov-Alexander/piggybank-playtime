@@ -60,18 +60,19 @@ export default function Transfers() {
 
   const searchProfiles = async () => {
     if (!searchQuery.trim()) return;
-    
     setSearching(true);
     try {
-      const { data, error } = await supabase
-        .from('profiles')
-        .select('*')
-        .ilike('full_name', `%${searchQuery}%`)
-        .neq('user_id', user?.id)
-        .limit(10);
-
+      const { data, error } = await supabase.rpc('search_profiles', {
+        search_query: searchQuery,
+      });
       if (error) throw error;
-      setProfiles(data || []);
+      const mapped = (data || []).filter((p: any) => p.user_id !== user?.id).map((p: any) => ({
+        id: p.user_id,
+        user_id: p.user_id,
+        full_name: p.full_name,
+        avatar_url: p.avatar_url,
+      }));
+      setProfiles(mapped);
     } catch (error: any) {
       toast({
         title: 'Ошибка поиска',

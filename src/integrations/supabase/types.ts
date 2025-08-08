@@ -192,6 +192,14 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      search_profiles: {
+        Args: { search_query: string }
+        Returns: {
+          user_id: string
+          full_name: string
+          avatar_url: string
+        }[]
+      }
       update_user_balance: {
         Args: { user_id: string; amount_change: number }
         Returns: undefined

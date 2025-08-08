@@ -18,6 +18,7 @@ import {
   Coins
 } from 'lucide-react';
 import { useState, useEffect } from 'react';
+import { supabase } from '@/integrations/supabase/client';
 
 const navItems = [
   { path: '/', icon: Home, label: 'Главная', badge: null },
@@ -37,9 +38,26 @@ export default function Navigation() {
   const [notifications, setNotifications] = useState(3);
 
   useEffect(() => {
-    // Имитация загрузки баланса
-    setBalance(2450.50);
-  }, []);
+    let isMounted = true;
+    const loadBalance = async () => {
+      if (!user) return;
+      const { data, error } = await supabase
+        .from('accounts')
+        .select('balance')
+        .eq('user_id', user.id)
+        .maybeSingle();
+
+      if (!isMounted) return;
+      if (error) {
+        console.error('Failed to load balance', error);
+        return;
+      }
+      if (data?.balance != null) setBalance(Number(data.balance));
+    };
+
+    loadBalance();
+    return () => { isMounted = false; };
+  }, [user]);
 
   if (!user) return null;
 
