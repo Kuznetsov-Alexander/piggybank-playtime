@@ -179,8 +179,6 @@ export default function Navigation() {
         </div>
       </nav>
 
-      {/* Main content spacer for desktop */}
-      <div className="hidden md:block w-64 flex-shrink-0" />
     </>
   );
 }
