@@ -88,10 +88,18 @@ export default function Transfers() {
     if (!selectedProfile || !amount || !account) return;
 
     const transferAmount = parseFloat(amount);
-    if (transferAmount <= 0 || transferAmount > account.balance) {
+    if (isNaN(transferAmount) || transferAmount <= 0) {
       toast({
         title: 'Ошибка перевода',
-        description: 'Недостаточно средств или неверная сумма',
+        description: 'Укажи корректную сумму',
+        variant: 'destructive',
+      });
+      return;
+    }
+    if (transferAmount > account.balance) {
+      toast({
+        title: 'Недостаточно средств',
+        description: 'Сумма превышает доступный баланс',
         variant: 'destructive',
       });
       return;
@@ -99,55 +107,24 @@ export default function Transfers() {
 
     setLoading(true);
     try {
-      // Создаем транзакцию перевода
-      const { error: transactionError } = await supabase
-        .from('transactions')
-        .insert({
-          type: 'transfer',
-          amount: transferAmount,
-          from_user_id: user?.id,
-          to_user_id: selectedProfile.user_id,
-          description: `Перевод для ${selectedProfile.full_name}`
-        });
-
-      if (transactionError) throw transactionError;
-
-      // Обновляем баланс отправителя
-      const { error: senderError } = await supabase
-        .from('accounts')
-        .update({ balance: account.balance - transferAmount })
-        .eq('user_id', user?.id);
-
-      if (senderError) throw senderError;
-
-      // Обновляем баланс получателя
-      const { data: receiverAccount, error: receiverAccountError } = await supabase
-        .from('accounts')
-        .select('balance')
-        .eq('user_id', selectedProfile.user_id)
-        .single();
-
-      if (receiverAccountError) throw receiverAccountError;
-
-      const { error: receiverError } = await supabase
-        .from('accounts')
-        .update({ balance: receiverAccount.balance + transferAmount })
-        .eq('user_id', selectedProfile.user_id);
-
-      if (receiverError) throw receiverError;
+      const { error } = await supabase.rpc('transfer_funds', {
+        to_user: selectedProfile.user_id,
+        amount: transferAmount,
+        description: `Перевод для ${selectedProfile.full_name}`,
+      });
+      if (error) throw error;
 
       toast({
         title: 'Перевод выполнен!',
         description: `${transferAmount} ₽ отправлено пользователю ${selectedProfile.full_name}`,
       });
 
-      // Сбрасываем форму
+      // Сброс формы и обновление данных
       setAmount('');
       setSelectedProfile(null);
       setProfiles([]);
       setSearchQuery('');
-      loadAccount();
-
+      await loadAccount();
     } catch (error: any) {
       toast({
         title: 'Ошибка перевода',
