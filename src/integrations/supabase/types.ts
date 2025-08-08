@@ -200,6 +200,10 @@ export type Database = {
           avatar_url: string
         }[]
       }
+      transfer_funds: {
+        Args: { to_user: string; amount: number; description?: string }
+        Returns: undefined
+      }
       update_user_balance: {
         Args: { user_id: string; amount_change: number }
         Returns: undefined
