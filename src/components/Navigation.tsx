@@ -16,7 +16,8 @@ import {
   Bell,
   Star,
   Coins,
-  BookOpen
+  BookOpen,
+  ShieldAlert
 } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { supabase } from '@/integrations/supabase/client';
@@ -28,6 +29,7 @@ const navItems = [
   { path: '/transactions', icon: TrendingUp, label: 'Транзакции', badge: null },
   { path: '/game', icon: Gamepad2, label: 'Игра', badge: null },
   { path: '/budget', icon: BookOpen, label: 'Бюджет‑челлендж', badge: 'NEW' },
+  { path: '/detective', icon: ShieldAlert, label: 'Детектив‑мошенник', badge: 'NEW' },
   { path: '/achievements', icon: Trophy, label: 'Достижения', badge: null },
   { path: '/profile', icon: User, label: 'Профиль', badge: null },
 ];

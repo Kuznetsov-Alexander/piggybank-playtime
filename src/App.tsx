@@ -15,6 +15,7 @@ import BudgetChallenge from "./pages/BudgetChallenge";
 import Achievements from "./pages/Achievements";
 import Profile from "./pages/Profile";
 import NotFound from "./pages/NotFound";
+import ScamDetective from "./pages/ScamDetective";
 
 const queryClient = new QueryClient();
 
@@ -102,6 +103,11 @@ const App = () => (
             <Route path="/budget" element={
               <ProtectedRoute>
                 <BudgetChallenge />
+              </ProtectedRoute>
+            } />
+            <Route path="/detective" element={
+              <ProtectedRoute>
+                <ScamDetective />
               </ProtectedRoute>
             } />
             <Route path="/achievements" element={
