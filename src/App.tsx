@@ -11,6 +11,7 @@ import Goals from "./pages/Goals";
 import Transfers from "./pages/Transfers";
 import Transactions from "./pages/Transactions";
 import Game from "./pages/Game";
+import BudgetChallenge from "./pages/BudgetChallenge";
 import Achievements from "./pages/Achievements";
 import Profile from "./pages/Profile";
 import NotFound from "./pages/NotFound";
@@ -96,6 +97,11 @@ const App = () => (
             <Route path="/game" element={
               <ProtectedRoute>
                 <Game />
+              </ProtectedRoute>
+            } />
+            <Route path="/budget" element={
+              <ProtectedRoute>
+                <BudgetChallenge />
               </ProtectedRoute>
             } />
             <Route path="/achievements" element={

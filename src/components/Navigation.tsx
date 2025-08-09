@@ -15,7 +15,8 @@ import {
   Gamepad2,
   Bell,
   Star,
-  Coins
+  Coins,
+  BookOpen
 } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { supabase } from '@/integrations/supabase/client';
@@ -25,7 +26,8 @@ const navItems = [
   { path: '/goals', icon: Target, label: 'Цели', badge: null },
   { path: '/transfers', icon: Send, label: 'Переводы', badge: null },
   { path: '/transactions', icon: TrendingUp, label: 'Транзакции', badge: null },
-  { path: '/game', icon: Gamepad2, label: 'Игра', badge: 'NEW' },
+  { path: '/game', icon: Gamepad2, label: 'Игра', badge: null },
+  { path: '/budget', icon: BookOpen, label: 'Бюджет‑челлендж', badge: 'NEW' },
   { path: '/achievements', icon: Trophy, label: 'Достижения', badge: null },
   { path: '/profile', icon: User, label: 'Профиль', badge: null },
 ];
