@@ -24,7 +24,7 @@ function ProtectedRoute({ children }: { children: React.ReactNode }) {
   
   if (loading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-primary/5 via-secondary/5 to-accent/5 flex items-center justify-center">
+      <div className="min-h-screen bg-gradient-to-br from-secondary/15 via-secondary/8 to-accent/8 flex items-center justify-center">
         <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
       </div>
     );
@@ -35,7 +35,7 @@ function ProtectedRoute({ children }: { children: React.ReactNode }) {
   }
   
   return (
-    <div className="flex min-h-screen bg-gradient-to-br from-primary/5 via-secondary/5 to-accent/5">
+    <div className="flex min-h-screen bg-gradient-to-br from-secondary/15 via-secondary/8 to-accent/8">
       <Navigation />
       <div className="flex-1">
         {children}
@@ -49,7 +49,7 @@ function PublicRoute({ children }: { children: React.ReactNode }) {
   
   if (loading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-primary/5 via-secondary/5 to-accent/5 flex items-center justify-center">
+      <div className="min-h-screen bg-gradient-to-br from-secondary/15 via-secondary/8 to-accent/8 flex items-center justify-center">
         <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
       </div>
     );

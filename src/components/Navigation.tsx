@@ -89,7 +89,7 @@ export default function Navigation() {
 
       {/* Navigation Sidebar */}
       <nav className={`
-        fixed left-0 top-0 h-full w-64 bg-card border-r border-border z-50 transform transition-transform duration-300 ease-in-out
+        fixed left-0 top-0 h-full w-64 bg-sidebar border-r border-sidebar z-50 transform transition-transform duration-300 ease-in-out
         ${isOpen ? 'translate-x-0' : '-translate-x-full'}
         md:translate-x-0 md:static md:z-auto flex flex-col
       `}>
@@ -174,7 +174,7 @@ export default function Navigation() {
         </div>
 
         {/* Bottom section */}
-        <div className="p-6 border-t border-border">
+        <div className="p-6 border-t border-sidebar">
           <div className="p-4 bg-gradient-to-r from-primary/10 to-secondary/10 rounded-lg border border-primary/20 animate-pulse">
             <p className="text-sm text-muted-foreground text-center">
               Копи, мечтай, достигай! 🌟
